@@ -1,31 +1,37 @@
 <?php
-/**
-* Plugin File for Shape Shed Human Filesize Plugin
-*
-* Returns the size of a file in human readable format (e.g 101.34 KB )
-*
-* This file must be placed in the
-* /system/plugins/ folder in your ExpressionEngine installation.
-* 
-* @version 1.0.0
-* @author George Ornbo <http://shapeshed.com/>
-* @license {@link http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-Share Alike 3.0 Unported} All source code commenting and attribution must not be removed. This is a condition of the attribution clause of the license.
-*/
+/** 
+ * ExpressionEngine
+ *
+ * LICENSE
+ *
+ * ExpressionEngine by EllisLab is copyrighted software
+ * The licence agreement is available here http://expressionengine.com/docs/license.html
+ * 
+ * Human Filesize
+ * 
+ * @category   Plugins
+ * @package    Human Filesize
+ * @version    1.1.0
+ * @since      1.0.0
+ * @author     George Ornbo <george@shapeshed.com>
+ * @see        {@link http://github.com/shapeshed/human_filesize.ee_addon/} 
+ * @license    {@link http://www.opensource.org/licenses/mit-license.php} 
+ */
 
 /**
 * Plugin information used by ExpressionEngine
 * @global array $plugin_info
 */
 $plugin_info = array(
-						'pi_name'			=> 'SS Human Filesize',
+						'pi_name'			=> 'Human Filesize',
 						'pi_version'		=> '1.0.0',
-						'pi_author'			=> 'George Ornbo, Shape Shed',
+						'pi_author'			=> 'George Ornbo',
 						'pi_author_url'		=> 'http://shapeshed.com/',
 						'pi_description'	=> 'Shows the size of a file in human readable format',
 						'pi_usage'			=> Ss_human_filesize::usage()
 					);
 
-class Ss_human_filesize{
+class Human_filesize{
 
 	/**
 	* Returned string
@@ -38,7 +44,7 @@ class Ss_human_filesize{
 	* Get the document size
 	* @access	public
 	*/
-	function Ss_human_filesize() 
+	function Human_filesize() 
 	    {
 
 	        global $TMPL, $FNS;	
@@ -87,24 +93,19 @@ class Ss_human_filesize{
 	* @return	string Plugin usage instructions
 	*/
 
-	function usage()
-	{
-		
-	return "This plugin returns the size of a file in human readable format (e.g 101.34 KB, 10.41 GB )
-	
-	Wrap the absolute path filename in these tags to have it processed
+function usage()
+{
+ob_start(); 
+?>
+See http://github.com/shapeshed/human_filesize.ee_addon/
 
-	{exp:doc_size}/uploads/documents/your_document.pdf{/exp:doc_size}
+<?php
+$buffer = ob_get_contents();
 
-	If you are using Mark Huot's File extension you can just use the EE tag you chose for the file field
+ob_end_clean(); 
 
-	{exp:ss_human_file_size}{your_file_field}{/exp:ss_human_file_size}
-	
-	The function calculates whether to show KB, MB or GB depending on the file size. 
-	
-	";		
-
-	}
+return $buffer;
+}
 	
 }
 
