@@ -3,9 +3,21 @@
 **Author**: [George Ornbo][]
 **Source Code**: [Github][]
 
+## Compatibility
+
+* ExpressionEngine Version 1.6.x
+
+## License
+
+Human Filesize is free for personal and commercial use. 
+
+If you use it commercially use a donation of $10 is suggested. You can send [donations here](http://pledgie.org/campaigns/2898). 
+
+Human Filesize is licensed under a [Open Source Initiative - BSD License][] license.
+
 ## Installation
 
-This file pi.human_filesize.php must be placed in the /system/plugins/ folder in your [ExpressionEngine][] installation.
+This file pi.human_filesize_.php must be placed in the /system/plugins/ folder in your [ExpressionEngine][] installation.
 
 ## Name
 
@@ -39,19 +51,6 @@ There are currently no single variables
 
 	{exp:human_filesize}/uploads/documents/your_document.pdf{/exp:human_filesize}		
 	
-## Compatibility
-
-ExpressionEngine Version 1.6.x
-
-## See also
-
-http://expressionengine.com/forums/viewthread/92466/
-	
-## License
-
-
-Human Filesize is licensed under a [Open Source Initiative - BSD License][] license.
-
 [George Ornbo]: http://shapeshed.com/
 [Github]: http://github.com/shapeshed/human_filesize.ee_addon/
 [ExpressionEngine]:http://www.expressionengine.com/index.php?affiliate=shapeshed

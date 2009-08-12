@@ -15,7 +15,7 @@
  * @since      1.0.0
  * @author     George Ornbo <george@shapeshed.com>
  * @see        {@link http://github.com/shapeshed/human_filesize.ee_addon/} 
- * @license    {@link http://www.opensource.org/licenses/mit-license.php} 
+ * @license    {@link http://opensource.org/licenses/bsd-license.php} 
  */
 
 /**
