@@ -28,7 +28,7 @@ $plugin_info = array(
 						'pi_author'			=> 'George Ornbo',
 						'pi_author_url'		=> 'http://shapeshed.com/',
 						'pi_description'	=> 'Shows the size of a file in human readable format',
-						'pi_usage'			=> Ss_human_filesize::usage()
+						'pi_usage'			=> Human_filesize::usage()
 					);
 
 class Human_filesize{
@@ -48,9 +48,12 @@ class Human_filesize{
 	    {
 
 	        global $TMPL, $FNS;	
-	
+		
 			// Get the full path to the doc
 			$file_path = $_SERVER['DOCUMENT_ROOT'].$TMPL->tagdata;
+			
+			// Slashes get converted to entities so convert back
+			$file_path = str_replace(SLASH, '/', $file_path);
 			
 			// Check the file exists. If not get the hell outta here!
 			if (!file_exists($file_path)) {
@@ -97,7 +100,7 @@ function usage()
 {
 ob_start(); 
 ?>
-See http://github.com/shapeshed/human_filesize.ee_addon/
+Documentation is available here http://shapeshed.github.com/expressionengine/extensions/filesize.html
 
 <?php
 $buffer = ob_get_contents();
