@@ -1,6 +1,6 @@
 # Human Filesize - Shows the size of a file in human readable format
 
-**Author**: [George Ornbo][]
+**Authors**: [George Ornbo][], [Craig Allen](http://www.craigallen.net.au/home.php)
 **Source Code**: [Github][]
 
 ## Compatibility

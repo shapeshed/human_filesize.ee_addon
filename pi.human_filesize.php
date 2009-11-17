@@ -11,9 +11,9 @@
  * 
  * @category   Plugins
  * @package    Human Filesize
- * @version    1.1.0
+ * @version    1.1.1
  * @since      1.0.0
- * @author     George Ornbo <george@shapeshed.com>
+ * @author     George Ornbo <george@shapeshed.com>, Craig Allen
  * @see        {@link http://github.com/shapeshed/human_filesize.ee_addon/} 
  * @license    {@link http://opensource.org/licenses/bsd-license.php} 
  */
@@ -23,92 +23,98 @@
 * @global array $plugin_info
 */
 $plugin_info = array(
-						'pi_name'			=> 'Human Filesize',
-						'pi_version'		=> '1.0.0',
-						'pi_author'			=> 'George Ornbo',
-						'pi_author_url'		=> 'http://shapeshed.com/',
-						'pi_description'	=> 'Shows the size of a file in human readable format',
-						'pi_usage'			=> Human_filesize::usage()
-					);
+  'pi_name'			=> 'Human Filesize',
+  'pi_version'		=> '1.1.1',
+  'pi_author'			=> 'George Ornbo, Craig Allen',
+  'pi_author_url'		=> 'http://shapeshed.com/',
+  'pi_description'	=> 'Shows the size of a file in human readable format',
+  'pi_usage'			=> Human_filesize::usage()
+  );
 
 class Human_filesize{
 
-	/**
-	* Returned string
-	* @var array
-	*/
-    var $return_data;
+  /**
+  * Returned string
+  * @var array
+  */
+  var $return_data;
 
+  /**
+  * Holds the path to the file to be evaluated
+  * @see __construct
+  * @var string
+  */	
+  private $file;
+	
+  /**
+  * The error message used if no file is found
+  * @var string
+  */	
+  private $error_message = "The file was not found - please check your settings";
  
-	/**
-	* Get the document size
-	* @access	public
-	*/
-	function Human_filesize() 
-	    {
+  /**
+  * The function first strips tags and trims the string from the template
+  * If the file is not found an error string is returned
+  * Otherwise a human readable file size is calculated and returned to the tempalte
+  * @access	public
+  */
+  function Human_filesize() 
+    {
 
-	        global $TMPL, $FNS;	
-		
-			// Get the full path to the doc
-			$file_path = $_SERVER['DOCUMENT_ROOT'].$TMPL->tagdata;
-			
-			// Slashes get converted to entities so convert back
-			$file_path = str_replace(SLASH, '/', $file_path);
-			
-			// Check the file exists. If not get the hell outta here!
-			if (!file_exists($file_path)) {
-				return;
-			}			
-			
-			// Get the file size in bytes
-			$filesize = filesize($file_path);
-				
-			// Now Format the bytes in a human readable format			
-		    $size = $filesize / 1024;
-		
-		    if($size < 1024)
-		        {
-		        $size = number_format($size, 2);
-		        $size .= ' KB';
-		        } 
-		
-		    else 
-		        {
-		        if($size / 1024 < 1024) 
-		            {
-		            $size = number_format($size / 1024, 2);
-		            $size .= ' MB';
-		            } 
-		        else if ($size / 1024 / 1024 < 1024)  
-		            {
-		            $size = number_format($size / 1024 / 1024, 2);
-		            $size .= ' GB';
-		            } 
-		        }
-	 		
-			$this->return_data = $size;
-		
-		}
+    global $TMPL, $FNS;	
+    
+    $this->file = trim(strip_tags($TMPL->tagdata));
 
-	/**
-	* Plugin usage documentation
-	*
-	* @return	string Plugin usage instructions
-	*/
+    $this->file = str_replace(SLASH, '/', $this->file);
+	    
+    if (stristr($this->file, $_SERVER['DOCUMENT_ROOT']))
+    {
+      $this->file =  $this->file;
+    }
+    else
+    {
+      $this->file = $_SERVER['DOCUMENT_ROOT'] . $this->file;		  
+    }	
+    
+    if (!file_exists($this->file)) 
+    {
+      return $this->error_message;
+    }
 
-function usage()
-{
-ob_start(); 
-?>
-Documentation is available here http://shapeshed.github.com/expressionengine/extensions/filesize.html
+    $filesize = filesize($this->file);
+    	
+    $size = $filesize / 1024;
 
-<?php
-$buffer = ob_get_contents();
+    if($size < 1024)
+    {
+      $size = number_format($size, 0);
+      $size .= 'KB';
+    } 
+    else 
+    {
+      if($size / 1024 < 1024) 
+      {
+        $size = number_format($size / 1024, 0);
+        $size .= 'MB';
+      } 
+      else if ($size / 1024 / 1024 < 1024)  
+      {
+        $size = number_format($size / 1024 / 1024, 0);
+        $size .= 'GB';
+      } 
+    }
+    $this->return_data = $size;
+  }
 
-ob_end_clean(); 
-
-return $buffer;
-}
+  /**
+  * Plugin usage documentation
+  *
+  * @return	string Plugin usage instructions
+  */
+  public function usage()
+  {
+    return "Documentation is available here http://shapeshed.github.com/expressionengine/plugins/filesize/";
+  }
 	
 }
 
