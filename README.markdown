@@ -1,6 +1,6 @@
 # Human Filesize - Shows the size of a file in human readable format
 
-**Authors**: [George Ornbo][], [Craig Allen](http://www.craigallen.net.au/home.php)
+**Author**: [George Ornbo][]
 **Source Code**: [Github][]
 
 ## Compatibility
@@ -41,7 +41,30 @@ The function calculates whether to show KB, MB or GB depending on the file size.
 
 ## Parameters
 
-There are currently no parameters
+### Unit ###
+
+	unit="MB"
+  
+Optional, either KB, MB or GB. If unit param is used but value isn't matched it defaults to KB. 
+If unit param is not used then the plugin shows KB, MB or GB depending on the filesize
+
+### Decimals ###
+
+	demimals="2"
+
+Optional, the number of decimal points to use. Defaults to zero.
+
+### Decimal point ###
+
+	dec_point=","
+  
+Optional, the separator to use as a decimal point. Defaults to '.'
+	
+### Thousands Separator ###
+
+	thousands_sep=" "
+	
+Optional, the separator to use to demarcate thousands. Defaults to ','
 	
 ## Single Variables
 
